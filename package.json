@@ -1,6 +1,6 @@
 {
-  "name"         : "node-red-contrib-db2",
-  "version"      : "0.0.1",
+  "name": "node-red-contrib-db2",
+  "version": "0.0.1",
   "description": "A Node-RED node to use a IBM DB2 database",
   "dependencies": {
     "ibm_db": "0.0.19",
@@ -22,5 +22,16 @@
     }
   },
   "optionalDependencies": {},
-  "scripts": {}
+  "scripts": {},
+  "engines" : { 
+	"node" : ">=4.0.0" 
+  }
+  "main": "ibmdb.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfou/node-red-contrib-db2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mfou/node-red-contrib-db2/issues"
+  }
 }
