@@ -88,9 +88,9 @@ module.exports = function(RED) {
         this.mydb = n.mydb;
         var node = this;
 
-        node.query = function(node, msg){
+        node.query = function(node, db, msg){
             if ( msg.topic !== null && typeof msg.topic === 'string' && msg.topic !== '') {
-                node.mydbNode.conn.query(msg.topic, function(err, rows) {
+                db.conn.query(msg.topic, function(err, rows) {
                     if (err) { 
                         console.log("QUERY ERROR "+ err);
                         node.error(err,msg); 
@@ -99,6 +99,7 @@ module.exports = function(RED) {
                         rows.forEach(function(row) {
                             node.send({ payload: row });
                         })
+                        node.send({ control: 'end' });
                     }
                 });
             }
@@ -119,14 +120,22 @@ module.exports = function(RED) {
             if ( msg.database !== null && typeof msg.database === 'string' && msg.database !== '') {
                 node.mydbNode = RED.nodes.getNode(n.mydb);
                 if (node.mydbNode) {
+                    node.send({ control: 'start' });
                     if(node.mydbNode.conn && node.mydbNode.conn.connName === msg.database){
                         console.log("already connected");
-                        node.query(node, msg);
+                        node.query(node, node.mydbNode, msg);
                     }
                     else{
-                        node.mydbNode.connect()
+                        var findNode;
+                        RED.nodes.eachNode((node)=>{
+                            if(node.db && node.db === msg.database){
+                                findNode = RED.nodes.getNode(node.id);
+                                node.mydb = node.id;
+                            }
+                        })
+                        findNode.connect()
                         .then(()=>{
-                            node.query(node, msg);
+                            node.query(node, findNode, msg);
                         });
                     }
                 }
@@ -139,6 +148,5 @@ module.exports = function(RED) {
             }
         });
     }
-    
     RED.nodes.registerType("ibmdb", IbmDBNodeIn);
 }
