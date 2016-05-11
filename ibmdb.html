@@ -56,8 +56,7 @@
     <p>Allows basic access to a IBM DB2 database.</p>
     <p>This node uses the <b>query</b> operation against the configured database. This does allow both INSERTS and DELETES.
     By its very nature it allows SQL injection... so <i>be careful out there...</i></p>
-    <p><code>msg.topic</code> must hold the <i>query</i> for the database, and the result is returned in <code>msg.payload</code>.</p>
-    <p><code>msg.payload</code> can contain an array of values to bind to the topic.</p>
+    <p><code>msg.payload</code> must hold the <i>query</i> for the database, and the result is returned in <code>msg.payload</code>.</p>
     <p>Typically the returned payload will be an array of the result rows.</p>
     <p>If nothing is found for the key then <i>null</i> is returned,</p>
     <p>The reconnect timeout in milliseconds can be changed by adding a line to <b>settings.js</b>
@@ -73,7 +72,7 @@
             name: {value:""}
         },
         inputs:1,
-        outputs:1,
+        outputs:2,
         icon: "db.png",
         label: function() {
             var levelNode = RED.nodes.node(this.mydb);

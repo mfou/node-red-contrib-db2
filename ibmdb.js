@@ -89,29 +89,29 @@ module.exports = function(RED) {
         var node = this;
 
         node.query = function(node, db, msg){
-            if ( msg.topic !== null && typeof msg.topic === 'string' && msg.topic !== '') {
-                db.conn.query(msg.topic, function(err, rows) {
+            if ( msg.payload !== null && typeof msg.payload === 'string' && msg.payload !== '') {
+                db.conn.query(msg.payload, function(err, rows) {
                     if (err) { 
                         console.log("QUERY ERROR "+ err);
                         node.error(err,msg); 
                     }
                     else {
                         rows.forEach(function(row) {
-                            node.send({ payload: row });
+                            node.send({ topic: msg.topic, payload: row });
                         })
-                        node.send({ control: 'end' });
+                        node.send([ null, { topic: msg.topic, control: 'end' }]);
                     }
                 });
             }
             else {
-                if (msg.topic === null) { 
-                    node.error("msg.topic : the query is not defined");
+                if (msg.payload === null) { 
+                    node.error("msg.payload : the query is not defined");
                 }
-                if (typeof msg.topic !== 'string') { 
-                    node.error("msg.topic : the query is not defined as a string");
+                if (typeof msg.payload !== 'string') { 
+                    node.error("msg.payload : the query is not defined as a string");
                 }
-                if (typeof msg.topic === 'string' && msg.topic === '') { 
-                    node.error("msg.topic : the query string is empty");
+                if (typeof msg.payload === 'string' && msg.payload === '') { 
+                    node.error("msg.payload : the query string is empty");
                 }
             }
         }
@@ -120,7 +120,7 @@ module.exports = function(RED) {
             if ( msg.database !== null && typeof msg.database === 'string' && msg.database !== '') {
                 node.mydbNode = RED.nodes.getNode(n.mydb);
                 if (node.mydbNode) {
-                    node.send({ control: 'start' });
+                    node.send([ null, { control: 'start', query: msg.payload, database: n.mydb } ]);
                     if(node.mydbNode.conn && node.mydbNode.conn.connName === msg.database){
                         console.log("already connected");
                         node.query(node, node.mydbNode, msg);

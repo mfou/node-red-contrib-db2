@@ -13,7 +13,9 @@
     "db2",
     "ibmdb"
   ],
-  "author": "Marc Fouqué",
+  "author": {
+    "name": "Marc Fouqué"
+  },
   "license": "MIT",
   "homepage": "https://github.com/mfou/node-red-contrib-db2",
   "node-red": {
@@ -23,8 +25,8 @@
   },
   "optionalDependencies": {},
   "scripts": {},
-  "engines" : { 
-	"node" : ">=4.0.0" 
+  "engines": {
+    "node": ">=4.0.0"
   },
   "main": "ibmdb.js",
   "repository": {
@@ -33,5 +35,30 @@
   },
   "bugs": {
     "url": "https://github.com/mfou/node-red-contrib-db2/issues"
-  }
+  },
+  "gitHead": "4fa8ed86fd9d02cfa2c3e3f63dca4b21fc9f6e77",
+  "_id": "node-red-contrib-db2@0.0.2",
+  "_shasum": "1ce34e9d9d8ba716493c0ee1069b3111c2d1ec19",
+  "_from": "node-red-contrib-db2@latest",
+  "_npmVersion": "3.8.0",
+  "_nodeVersion": "4.3.2",
+  "_npmUser": {
+    "name": "mfou",
+    "email": "marc.fouque@gmail.com"
+  },
+  "dist": {
+    "shasum": "1ce34e9d9d8ba716493c0ee1069b3111c2d1ec19",
+    "tarball": "https://registry.npmjs.org/node-red-contrib-db2/-/node-red-contrib-db2-0.0.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "mfou",
+      "email": "marc.fouque@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/node-red-contrib-db2-0.0.2.tgz_1462276152511_0.5272947801277041"
+  },
+  "_resolved": "https://registry.npmjs.org/node-red-contrib-db2/-/node-red-contrib-db2-0.0.2.tgz"
 }
