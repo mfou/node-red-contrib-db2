@@ -20,7 +20,7 @@
   "homepage": "https://github.com/mfou/node-red-contrib-db2",
   "node-red": {
     "nodes": {
-      "ibmdb": "ibmdb.js"
+      "bigdb2": "ibmdb.js"
     }
   },
   "optionalDependencies": {},
